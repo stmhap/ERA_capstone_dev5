@@ -9,8 +9,8 @@ from typing import Any, Literal, Optional, Type, Union
 import torch
 from typing_extensions import Self
 
-import lit_gpt.model
-from lit_gpt.utils import find_multiple
+import tsai_gpt.model
+from tsai_gpt.utils import find_multiple
 
 
 @dataclass
