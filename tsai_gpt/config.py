@@ -122,7 +122,7 @@ class Config:
 
     @classmethod
     def from_checkpoint(cls, path: Path, **kwargs: Any) -> Self:
-        """Automatically load `lit_config.json` and if it doesn't exist - a matching config from `lit_gpt/config.py`."""
+        """Automatically load `lit_config.json` and if it doesn't exist - a matching config from `tsai_gpt/config.py`."""
         if (config_path := path / "lit_config.json").is_file():
             return cls.from_json(config_path, **kwargs)
         if (model_name := path.name) in name_to_config:
@@ -132,13 +132,13 @@ class Config:
     @property
     def mlp_class(self) -> Type:
         # `self._mlp_class` cannot be the type to keep the config json serializable
-        return getattr(lit_gpt.model, self._mlp_class)
+        return getattr(tsai_gpt.model, self._mlp_class)
 
     @property
     def norm_class(self) -> Type:
         # `self._norm_class` cannot be the type to keep the config json serializable
         if self._norm_class == "RMSNorm":
-            from lit_gpt.rmsnorm import RMSNorm
+            from tsai_gpt.rmsnorm import RMSNorm
 
             return RMSNorm
         return getattr(torch.nn, self._norm_class)
